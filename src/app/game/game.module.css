@@ -34,47 +34,22 @@
 .gameInfo {
   display: flex;
   gap: 1rem;
+  align-items: center;
+}
+
+.stakeDisplay {
+  padding: 0.5rem 1rem;
+  background: rgba(102, 126, 234, 0.2);
+  border: 1px solid #667eea;
+  border-radius: 6px;
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .gameMain {
   flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.gameContainer {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.placeholder {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  text-align: center;
-  padding: 2rem;
-}
-
-.placeholder h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #667eea;
-}
-
-.placeholder p {
-  font-size: 1.25rem;
-  color: #cccccc;
-  margin-bottom: 0.5rem;
-}
-
-.note {
-  font-size: 1rem !important;
-  color: #888888 !important;
-  font-style: italic;
-  margin-top: 1rem;
+  overflow: hidden;
 }
