@@ -1,18 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Link from "next/link";
 import styles from "./game.module.css";
+import TacticsGame from "@/components/TacticsGame";
 
 export default function GamePage() {
-  const gameContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Game initialization logic will go here
-    // This would load the tactics game engine
-    console.log("Game container ready");
-  }, []);
-
   return (
     <div className={styles.gamePage}>
       <header className={styles.header}>
@@ -26,14 +18,8 @@ export default function GamePage() {
       </header>
       
       <main className={styles.gameMain}>
-        <div ref={gameContainerRef} id="game-container" className={styles.gameContainer}>
-          <div className={styles.placeholder}>
-            <h2>Tactics Game Engine</h2>
-            <p>The tactics game will be rendered here</p>
-            <p className={styles.note}>
-              Game engine from pongstylin/tactics will be integrated here
-            </p>
-          </div>
+        <div id="game-container" className={styles.gameContainer}>
+          <TacticsGame />
         </div>
       </main>
     </div>
