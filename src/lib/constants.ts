@@ -13,6 +13,7 @@ export const MIN_STAKE_AMOUNT = 10; // Minimum 10 TACT to stake
 // Game configuration
 export const MIN_GAME_STAKE = 100; // Minimum 100 TACT staked to enter competitive games
 export const TOURNAMENT_ENTRY_FEE = 50; // 50 TACT per tournament entry
+export const GAME_STAKE_PRESETS = [100, 250, 500, 1000]; // Preset stake amounts for games
 
 // Social links
 export const SOCIAL_LINKS = {
