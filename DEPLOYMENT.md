@@ -7,7 +7,6 @@ This guide walks you through deploying Tactics on Chain to production.
 1. Deploy smart contracts to Base network
 2. Configure environment variables
 3. Deploy to Vercel
-4. Configure Farcaster Frame
 
 ## Detailed Steps
 
@@ -43,7 +42,6 @@ Create `.env.local` with:
 NEXT_PUBLIC_THIRDWEB_CLIENT_ID=your_client_id
 NEXT_PUBLIC_TACT_TOKEN_ADDRESS=0x...
 NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS=0x...
-NEXT_PUBLIC_FARCASTER_APP_ID=your_app_id
 NEXT_PUBLIC_BASE_URL=https://your-domain.vercel.app
 ```
 
@@ -70,16 +68,6 @@ vercel
 vercel --prod
 ```
 
-### 4. Farcaster Frame Setup
-
-```
-1. Register at developers.farcaster.xyz
-2. Create new Frame
-3. Set Frame URL: https://your-domain.vercel.app/api/frame
-4. Test at warpcast.com/~/developers/frames
-5. Share on Warpcast
-```
-
 ## Verification
 
 After deployment:
@@ -89,7 +77,6 @@ After deployment:
 - [ ] Verify contract addresses in UI
 - [ ] Test token purchase flow
 - [ ] Test staking functionality
-- [ ] Verify Farcaster Frame loads
 - [ ] Test game page loads
 
 ## Troubleshooting
@@ -115,12 +102,10 @@ After deployment:
 2. Set up analytics (optional)
 3. Monitor Vercel logs
 4. Test all user flows
-5. Announce on Farcaster
 
 ## Support
 
 For issues:
 - Check GitHub issues
-- Contact via Farcaster
 - Review Vercel logs
 - Check Thirdweb dashboard

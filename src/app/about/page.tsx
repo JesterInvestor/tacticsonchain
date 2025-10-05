@@ -45,10 +45,6 @@ export default function AboutPage() {
                 <p>Easy wallet connection and seamless Web3 onboarding</p>
               </div>
               <div className={styles.feature}>
-                <h3>📱 Farcaster Compatible</h3>
-                <p>Play as a Farcaster Frame miniapp for social gaming</p>
-              </div>
-              <div className={styles.feature}>
                 <h3>🏆 On-Chain Staking</h3>
                 <p>Stake your tokens to participate in competitive matches</p>
               </div>
@@ -87,9 +83,6 @@ export default function AboutPage() {
               </div>
               <div className={styles.tech}>
                 <strong>Hosting:</strong> Vercel
-              </div>
-              <div className={styles.tech}>
-                <strong>Social:</strong> Farcaster Frames
               </div>
             </div>
           </section>

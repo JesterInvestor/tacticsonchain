@@ -135,7 +135,6 @@ rm -rf .next         # Remove build cache
 
 - 📖 Check the full [README](./README.md)
 - 🐛 [Open an issue](https://github.com/JesterInvestor/tacticsonchain/issues)
-- 💬 Ask on [Farcaster](https://warpcast.com/tacticsonchain)
 
 ---
 

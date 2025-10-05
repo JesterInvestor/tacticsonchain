@@ -1,6 +1,6 @@
 # Tactics on Chain
 
-A blockchain-enabled tactical turn-based strategy game built with Next.js, featuring Web3 integration via Thirdweb, on-chain staking with $TACT tokens, and Farcaster Frames compatibility.
+A blockchain-enabled tactical turn-based strategy game built with Next.js, featuring Web3 integration via Thirdweb and on-chain staking with $TACT tokens.
 
 ## Features
 
@@ -9,7 +9,6 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
 - 💎 **$TACT Token** - Native ERC20 token for gaming economy
 - 🔒 **On-Chain Staking** - Stake tokens to participate in games
 - 🌐 **Thirdweb SDK** - Easy wallet connection and Web3 onboarding
-- 📱 **Farcaster Frames** - Compatible as a miniapp
 - ☁️ **Vercel Hosting** - Optimized for serverless deployment
 
 ## Tech Stack
@@ -19,7 +18,6 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
 - **Web3:** Thirdweb SDK
 - **Smart Contracts:** Solidity (ERC20 token + Staking)
 - **Hosting:** Vercel
-- **Social:** Farcaster Frames
 
 ## Prerequisites
 
@@ -27,7 +25,6 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
 - A Thirdweb account and API key
 - A Web3 wallet (MetaMask, Coinbase Wallet, etc.)
 - Vercel account (for deployment)
-- Farcaster account (for Frame deployment)
 
 ## Local Development
 
@@ -48,7 +45,6 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
    NEXT_PUBLIC_THIRDWEB_CLIENT_ID=your_thirdweb_client_id
    NEXT_PUBLIC_TACT_TOKEN_ADDRESS=your_tact_token_address
    NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS=your_staking_contract_address
-   NEXT_PUBLIC_FARCASTER_APP_ID=your_farcaster_app_id
    NEXT_PUBLIC_BASE_URL=http://localhost:3000
    ```
 
@@ -114,7 +110,6 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
    NEXT_PUBLIC_THIRDWEB_CLIENT_ID
    NEXT_PUBLIC_TACT_TOKEN_ADDRESS
    NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS
-   NEXT_PUBLIC_FARCASTER_APP_ID
    NEXT_PUBLIC_BASE_URL (e.g., https://your-app.vercel.app)
    ```
 
@@ -144,39 +139,12 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
    vercel env add NEXT_PUBLIC_THIRDWEB_CLIENT_ID
    vercel env add NEXT_PUBLIC_TACT_TOKEN_ADDRESS
    vercel env add NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS
-   vercel env add NEXT_PUBLIC_FARCASTER_APP_ID
    ```
 
 5. **Deploy to production:**
    ```bash
    vercel --prod
    ```
-
-## Farcaster Frame Deployment
-
-### Setup Farcaster Frame
-
-1. **Register your Frame:**
-   - Go to [Farcaster Developer Portal](https://developers.farcaster.xyz/)
-   - Create a new Frame application
-   - Set the Frame URL to: `https://your-app.vercel.app/api/frame`
-
-2. **Configure Frame Metadata:**
-   The frame metadata is automatically generated via the API route at `/api/frame`
-
-3. **Test your Frame:**
-   - Use the Farcaster Frame Validator: [https://warpcast.com/~/developers/frames](https://warpcast.com/~/developers/frames)
-   - Enter your Frame URL and validate
-
-4. **Share your Frame:**
-   - Post on Warpcast with your Frame URL
-   - Users can interact with the Frame directly in their feed
-
-### Frame Features
-
-- **Launch Game:** Opens the full game in a new window
-- **View Stats:** Shows user stats and $TACT balance
-- **Quick Stake:** Allows staking directly from the Frame
 
 ## Project Structure
 
@@ -188,8 +156,7 @@ tacticsonchain/
 │   │   ├── stake/           # Staking page
 │   │   ├── shop/            # Token purchase page
 │   │   ├── about/           # About page
-│   │   ├── api/             # API routes
-│   │   │   └── frame/       # Farcaster Frame endpoints
+│   │   ├── api/             # API routes (if needed)
 │   │   ├── layout.tsx       # Root layout
 │   │   ├── page.tsx         # Home page
 │   │   └── globals.css      # Global styles
@@ -240,7 +207,6 @@ tacticsonchain/
 | `NEXT_PUBLIC_THIRDWEB_CLIENT_ID` | Thirdweb API client ID | `abc123...` |
 | `NEXT_PUBLIC_TACT_TOKEN_ADDRESS` | Deployed TACT token contract | `0x1234...` |
 | `NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS` | Deployed staking contract | `0x5678...` |
-| `NEXT_PUBLIC_FARCASTER_APP_ID` | Farcaster app ID | `farcaster-app-id` |
 | `NEXT_PUBLIC_BASE_URL` | Base URL of deployment | `https://tacticsonchain.vercel.app` |
 
 ## Development Scripts
@@ -283,8 +249,238 @@ The original Tactics game source code falls under the Unlicense. Smart contracts
 
 For issues, questions, or contributions, please:
 - Open an issue on GitHub
-- Contact via Farcaster: [@tacticsonchain](https://warpcast.com/tacticsonchain)
 - Join our Discord community (link coming soon)
+
+## Game Engine Integration Guide
+
+The game page currently shows a placeholder. To integrate the full game engine from [pongstylin/tactics](https://github.com/pongstylin/tactics), follow these steps:
+
+### Understanding the Original Game Architecture
+
+The pongstylin/tactics repository contains a complete JavaScript-based tactical game engine with:
+- **224+ source files** organized in a modular structure
+- **Client-side game logic** in vanilla JavaScript
+- **Canvas-based rendering** for the game board and units
+- **Turn-based combat system** with unit types, abilities, and AI
+- **Multiplayer support** with game state synchronization
+
+### Integration Approach
+
+There are three main approaches to integrate the game engine:
+
+#### Option 1: Direct Integration (Recommended for MVP)
+
+1. **Clone the original repository:**
+   ```bash
+   git clone https://github.com/pongstylin/tactics.git /tmp/tactics
+   ```
+
+2. **Copy game engine files:**
+   ```bash
+   # Create a game engine directory
+   mkdir -p src/game-engine
+   
+   # Copy core game files (adjust paths based on original repo structure)
+   cp -r /tmp/tactics/src/tactics/* src/game-engine/
+   cp -r /tmp/tactics/static/* public/game-assets/
+   ```
+
+3. **Create a Next.js wrapper component:**
+   ```typescript
+   // src/components/TacticsGame.tsx
+   'use client';
+   
+   import { useEffect, useRef } from 'react';
+   
+   export default function TacticsGame() {
+     const containerRef = useRef<HTMLDivElement>(null);
+     
+     useEffect(() => {
+       // Initialize the game engine
+       // Load game scripts dynamically
+       const loadGame = async () => {
+         // Import game initialization code
+         // Set up canvas, event listeners, etc.
+       };
+       
+       loadGame();
+       
+       return () => {
+         // Cleanup game resources
+       };
+     }, []);
+     
+     return (
+       <div ref={containerRef} id="tactics-game-container">
+         <canvas id="game-canvas" />
+       </div>
+     );
+   }
+   ```
+
+4. **Update the game page:**
+   ```typescript
+   // src/app/game/page.tsx
+   import TacticsGame from '@/components/TacticsGame';
+   
+   export default function GamePage() {
+     return (
+       <div className={styles.gamePage}>
+         <TacticsGame />
+       </div>
+     );
+   }
+   ```
+
+#### Option 2: TypeScript Migration (Recommended for Production)
+
+1. **Analyze the original codebase:**
+   - Review the main entry points and dependencies
+   - Identify core modules (game logic, rendering, AI, networking)
+   - Document the API surface between modules
+
+2. **Set up the module structure:**
+   ```
+   src/game-engine/
+   ├── core/           # Core game logic
+   │   ├── game.ts
+   │   ├── board.ts
+   │   └── units.ts
+   ├── rendering/      # Canvas rendering
+   │   ├── renderer.ts
+   │   └── sprites.ts
+   ├── ai/             # AI opponent logic
+   │   └── ai.ts
+   ├── network/        # Multiplayer (if needed)
+   │   └── sync.ts
+   └── types/          # TypeScript definitions
+       └── index.ts
+   ```
+
+3. **Migrate files incrementally:**
+   - Start with type definitions
+   - Convert core game logic modules
+   - Add proper TypeScript types throughout
+   - Test each module as you convert it
+
+4. **Add Web3 hooks:**
+   ```typescript
+   // Example: Integrate staking verification
+   import { useContract } from '@thirdweb-dev/react';
+   
+   export function useGameAccess() {
+     const { contract } = useContract(STAKING_CONTRACT_ADDRESS);
+     
+     async function verifyStake(address: string): Promise<boolean> {
+       // Check if user has required stake
+       const stake = await contract.call('getStake', [address]);
+       return stake >= MIN_GAME_STAKE;
+     }
+     
+     return { verifyStake };
+   }
+   ```
+
+#### Option 3: iframe Embedding (Quickest but Limited)
+
+1. **Host the original game separately:**
+   - Deploy pongstylin/tactics to a subdomain or separate service
+   - Ensure CORS and security headers are properly configured
+
+2. **Embed via iframe:**
+   ```typescript
+   export default function GamePage() {
+     return (
+       <div className={styles.gamePage}>
+         <iframe
+           src="https://game.tacticsonchain.app"
+           className={styles.gameFrame}
+           allow="fullscreen"
+         />
+       </div>
+     );
+   }
+   ```
+
+3. **Add postMessage communication:**
+   - Send wallet address and stake status to game
+   - Receive game results back to main app
+   - Update blockchain state based on game outcomes
+
+### Key Considerations
+
+**Asset Management:**
+- Move sprite sheets, sounds, and other assets to `public/` directory
+- Update asset paths in the game code to work with Next.js static serving
+- Consider using Next.js Image component for optimized loading
+
+**State Management:**
+- Keep game state separate from React state when possible
+- Use React only for UI wrapper and Web3 integration
+- Avoid re-renders during gameplay
+
+**Performance:**
+- Game loop should run independently of React render cycle
+- Use requestAnimationFrame for smooth animations
+- Consider using Web Workers for AI calculations
+
+**Web3 Integration Points:**
+1. **Pre-game:** Verify user has required stake before allowing entry
+2. **During game:** Optionally record moves on-chain for tournaments
+3. **Post-game:** Update rewards, rankings, and achievements on-chain
+
+**Testing Strategy:**
+- Unit test core game logic separately
+- Integration test Web3 hooks
+- End-to-end test complete game flow with mock contracts
+- Performance test on various devices
+
+### Recommended Development Steps
+
+1. **Phase 1 - Setup (1-2 days)**
+   - Clone original repository
+   - Analyze code structure and dependencies
+   - Create initial directory structure
+
+2. **Phase 2 - Core Integration (3-5 days)**
+   - Copy and adapt game engine files
+   - Create React wrapper component
+   - Test basic game rendering and controls
+
+3. **Phase 3 - Web3 Integration (2-3 days)**
+   - Add stake verification before game start
+   - Implement reward distribution after game end
+   - Add wallet connection state to game
+
+4. **Phase 4 - Polish (2-3 days)**
+   - Optimize performance
+   - Add error handling
+   - Improve mobile responsiveness
+   - Add loading states and transitions
+
+5. **Phase 5 - Testing (1-2 days)**
+   - Test all game features
+   - Verify Web3 integration
+   - Fix bugs and edge cases
+
+### Troubleshooting Common Issues
+
+**Module resolution errors:**
+- Update import paths for Next.js structure
+- Use aliases in `tsconfig.json` for cleaner imports
+
+**Canvas rendering issues:**
+- Ensure canvas is properly initialized after mount
+- Check for window/document references (use `useEffect`)
+
+**Game state sync problems:**
+- Separate game state from React component state
+- Use refs for values that shouldn't trigger re-renders
+
+**Asset loading failures:**
+- Verify paths are correct for Next.js public directory
+- Use dynamic imports for large assets
+- Add proper loading states
 
 ## Roadmap
 

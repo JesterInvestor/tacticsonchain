@@ -17,7 +17,6 @@ export const TOURNAMENT_ENTRY_FEE = 50; // 50 TACT per tournament entry
 // Social links
 export const SOCIAL_LINKS = {
   github: 'https://github.com/JesterInvestor/tacticsonchain',
-  farcaster: 'https://warpcast.com/tacticsonchain',
   originalGame: 'https://github.com/pongstylin/tactics',
 };
 

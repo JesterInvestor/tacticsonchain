@@ -1,50 +1,5 @@
 # API Documentation
 
-## Farcaster Frame API
-
-### GET /api/frame
-
-Returns Frame metadata for Farcaster integration.
-
-**Response:**
-```json
-{
-  "version": "next",
-  "imageUrl": "https://tacticsonchain.vercel.app/og-image.png",
-  "button": {
-    "title": "Play Tactics",
-    "action": {
-      "type": "launch_frame",
-      "name": "Tactics on Chain",
-      "url": "https://tacticsonchain.vercel.app/game",
-      "splashImageUrl": "https://tacticsonchain.vercel.app/splash.png",
-      "splashBackgroundColor": "#1a1a1a"
-    }
-  }
-}
-```
-
-### POST /api/frame
-
-Handles Frame action interactions from Farcaster.
-
-**Request Body:**
-```json
-{
-  "action": "button_click",
-  "buttonIndex": 1,
-  "fid": 12345,
-  "castId": "0x..."
-}
-```
-
-**Response:**
-```json
-{
-  "success": true
-}
-```
-
 ## Smart Contract ABIs
 
 ### TACTToken Contract
@@ -228,7 +183,6 @@ Get block explorer URL for transaction.
 | `NEXT_PUBLIC_THIRDWEB_CLIENT_ID` | Yes | Thirdweb API client ID |
 | `NEXT_PUBLIC_TACT_TOKEN_ADDRESS` | Yes | Deployed TACT token address |
 | `NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS` | Yes | Deployed staking contract address |
-| `NEXT_PUBLIC_FARCASTER_APP_ID` | Optional | Farcaster app ID for Frame |
 | `NEXT_PUBLIC_BASE_URL` | Yes | Base URL of deployment |
 
 ## Error Handling
