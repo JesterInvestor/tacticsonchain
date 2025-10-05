@@ -2,7 +2,7 @@
 
 ## Overview
 
-Tactics on Chain is a blockchain-enabled tactical turn-based strategy game built with Next.js, featuring Web3 integration via Thirdweb, on-chain staking with $TACT tokens on Base network, and Farcaster Frames compatibility.
+Tactics on Chain is a blockchain-enabled tactical turn-based strategy game built with Next.js, featuring Web3 integration via Thirdweb and on-chain staking with $TACT tokens on Base network.
 
 ## What Was Built
 
@@ -38,12 +38,6 @@ Tactics on Chain is a blockchain-enabled tactical turn-based strategy game built
 - **Game Placeholder**: Ready for game engine integration
 - **About Page**: Project information
 
-### ✅ Farcaster Integration
-- Frame API endpoint (`/api/frame`)
-- PWA manifest with Frame metadata
-- Launch frame configuration
-- Ready for miniapp deployment
-
 ### ✅ Comprehensive Documentation
 1. **README.md** - Full project documentation
 2. **QUICKSTART.md** - 5-minute setup guide
@@ -65,7 +59,7 @@ Tactics on Chain is a blockchain-enabled tactical turn-based strategy game built
 - **Lines of Code**: ~666 lines
 - **Smart Contracts**: 2 Solidity contracts
 - **Documentation**: 5 comprehensive guides
-- **Pages**: 5 routes + 1 API endpoint
+- **Pages**: 5 routes
 - **Build Size**: 830kB first load JS
 
 ## Architecture
@@ -111,7 +105,6 @@ Tactics on Chain is a blockchain-enabled tactical turn-based strategy game built
 ### Deployment
 - **Vercel**: Serverless hosting
 - **GitHub Actions**: CI/CD pipelines
-- **Farcaster**: Frame miniapp support
 
 ## Ready for Production
 
@@ -185,11 +178,6 @@ NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS=0x...
 NEXT_PUBLIC_BASE_URL=https://your-domain.vercel.app
 ```
 
-### Optional Variables
-```env
-NEXT_PUBLIC_FARCASTER_APP_ID=your_farcaster_id
-```
-
 ## Quick Commands
 
 ```bash
@@ -217,7 +205,6 @@ vercel --prod            # Deploy to production
 
 - **GitHub**: [JesterInvestor/tacticsonchain](https://github.com/JesterInvestor/tacticsonchain)
 - **Issues**: [GitHub Issues](https://github.com/JesterInvestor/tacticsonchain/issues)
-- **Farcaster**: [@tacticsonchain](https://warpcast.com/tacticsonchain)
 
 ## License
 
