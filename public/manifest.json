@@ -1,0 +1,37 @@
+{
+  "name": "Tactics on Chain",
+  "short_name": "TacticsOnChain",
+  "description": "A tactical turn-based strategy game with blockchain integration",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#667eea",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["games", "entertainment"],
+  "frame": {
+    "version": "next",
+    "imageUrl": "https://tacticsonchain.vercel.app/og-image.png",
+    "button": {
+      "title": "Play Now",
+      "action": {
+        "type": "launch_frame",
+        "name": "Tactics on Chain",
+        "url": "https://tacticsonchain.vercel.app/game",
+        "splashImageUrl": "https://tacticsonchain.vercel.app/splash.png",
+        "splashBackgroundColor": "#1a1a1a"
+      }
+    }
+  }
+}
