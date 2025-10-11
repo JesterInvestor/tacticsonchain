@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ThirdwebProvider } from "@/components/ThirdwebProvider";
+// ...existing code...
 import { WalletProvider } from "@/lib/wallet";
 import "./globals.css";
 
@@ -17,9 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThirdwebProvider>
-          <WalletProvider>{children}</WalletProvider>
-        </ThirdwebProvider>
+        <WalletProvider>{children}</WalletProvider>
       </body>
     </html>
   );
