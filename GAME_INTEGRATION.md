@@ -152,6 +152,41 @@ To integrate the actual game engine from [pongstylin/tactics](https://github.com
 3. Import and render directly instead of using iframe
 4. See README.md for detailed migration guide
 
+---
+
+Direct integration (what this repo now provides)
+
+This repository includes a small adapter that allows you to drop a compiled game bundle into `public/game-assets/game.bundle.js` and mount it directly inside the React app.
+
+Files added:
+
+- `src/lib/gameAdapter.ts` — helpers to load the bundle, mount the game into a container element, and provide shims/bridges for legacy globals. It also provides `recordGameResultOnChain` which attempts to send a transaction via `window.ethereum` (Metamask) when available.
+- `src/components/TacticsIframe.tsx` — updated to dynamically load and mount the game bundle into `#tactics-game-container`. Falls back to the placeholder UI if the bundle is not present or fails to initialize.
+
+Bundle expectations
+
+- The game bundle should attach an init function the adapter can call. Supported entry points (in order):
+  - `window.initTactics(container, { stake, onEnd })`
+  - `window.Tactics.init(container, { stake, onEnd })`
+
+- The `onEnd(result, score)` callback should be called by the game when a match finishes. The adapter will forward that to window messages and optionally call `recordGameResultOnChain`.
+
+How to use
+
+1. Build or compile the original `pongstylin/tactics` into a single bundle that exposes `initTactics` or `Tactics.init` as described above.
+2. Place the bundle at `public/game-assets/game.bundle.js`.
+3. Open the game page in the app, select a stake, and click Start — the adapter will load and mount the bundle automatically.
+
+Notes on shimming
+
+- The adapter exposes `window.TACTICS_ENV` with helpers the game can call to read the stake or post messages.
+- If your game expects other globals (e.g., PIXI, Howler, or direct access to `document` lifecycle in a specific way), you may need to adapt the game's build or add small shims inside `gameAdapter.ts`.
+
+Recording game results on-chain
+
+- `gameAdapter.recordGameResultOnChain(contractAddress, result, score, stake)` attempts to use `window.ethereum` to sign/send a transaction. If you prefer using Waypoint deep-links (mobile/keyless wallets), modify the onEnd handler to build a Waypoint deep link and open it for the user to approve.
+
+
 ## PostMessage Communication
 
 The current implementation sets up bidirectional communication between the parent page and game iframe.
