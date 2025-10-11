@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useAddress } from "@thirdweb-dev/react";
+import { useAddress } from "@/lib/wallet";
 import styles from "./shop.module.css";
 
 const TACT_PACKAGES = [

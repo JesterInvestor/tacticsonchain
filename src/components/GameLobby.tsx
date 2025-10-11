@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useAddress } from "@thirdweb-dev/react";
+import { useAddress } from "@/lib/wallet";
 import { ConnectButton } from "./ConnectButton";
 import { GAME_STAKE_PRESETS } from "@/lib/constants";
 import styles from "./GameLobby.module.css";

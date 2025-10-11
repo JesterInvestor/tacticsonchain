@@ -1,6 +1,6 @@
 # Tactics on Chain
 
-A blockchain-enabled tactical turn-based strategy game built with Next.js, featuring Web3 integration via Thirdweb and on-chain staking with $TACT tokens.
+A blockchain-enabled tactical turn-based strategy game built with Next.js, featuring Web3 integration and on-chain staking with $TACT tokens.
 
 ## Features
 
@@ -8,7 +8,7 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
 - ⛓️ **Blockchain Integration** - Built on Base network
 - 💎 **$TACT Token** - Native ERC20 token for gaming economy
 - 🔒 **On-Chain Staking** - Stake tokens to participate in games
-- 🌐 **Thirdweb SDK** - Easy wallet connection and Web3 onboarding
+-- 🌐 **Wallet integration** - The app includes a lightweight `WalletProvider` for local testing and a Ronin Waypoint React Native example in `waypoint-rn-example/` for mobile deep-link wallet flows.
 - ☁️ **Vercel Hosting** - Optimized for serverless deployment
 
 ## Tech Stack
@@ -22,8 +22,7 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
 ## Prerequisites
 
 - Node.js 18+ and npm/yarn
-- A Thirdweb account and API key
-- A Web3 wallet (MetaMask, Coinbase Wallet, etc.)
+- A Web3 wallet (MetaMask, Coinbase Wallet, etc.) or Ronin Waypoint for mobile integrations
 - Vercel account (for deployment)
 
 ## Local Development
@@ -40,9 +39,8 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
    ```
 
 3. **Set up environment variables:**
-   Create a `.env.local` file in the root directory:
+   Create a `.env.local` file in the root directory (example variables below):
    ```env
-   NEXT_PUBLIC_THIRDWEB_CLIENT_ID=your_thirdweb_client_id
    NEXT_PUBLIC_TACT_TOKEN_ADDRESS=your_tact_token_address
    NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS=your_staking_contract_address
    NEXT_PUBLIC_BASE_URL=http://localhost:3000
@@ -60,18 +58,7 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
 
 ### Deploy $TACT Token Contract
 
-1. **Using Thirdweb Dashboard:**
-   - Go to [thirdweb.com/dashboard](https://thirdweb.com/dashboard)
-   - Click "Deploy Contract"
-   - Select "Token" or upload `src/contracts/TACTToken.sol`
-   - Choose Base network
-   - Configure token parameters:
-     - Name: Tactics Token
-     - Symbol: TACT
-     - Initial Supply: 10,000,000
-   - Deploy and save the contract address
-
-2. **Using Hardhat/Forge (Alternative):**
+1. **Using Hardhat/Forge:**
    ```bash
    # Install dependencies
    npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers
@@ -82,11 +69,11 @@ A blockchain-enabled tactical turn-based strategy game built with Next.js, featu
 
 ### Deploy Staking Contract
 
-1. **Using Thirdweb Dashboard:**
-   - Upload `src/contracts/TACTStaking.sol`
-   - Select Base network
-   - Provide the TACT token address as constructor parameter
-   - Deploy and save the contract address
+1. **Using Hardhat/Forge:**
+   ```bash
+   # Deploy staking contract (example)
+   npx hardhat run scripts/deploy-staking.js --network base
+   ```
 
 2. Update your `.env.local` with the deployed contract addresses
 
@@ -195,10 +182,12 @@ tacticsonchain/
 - On-chain verification of game stakes
 - Tournament support with token prizes
 
-### Wallet Integration
-- Connect with any Web3 wallet via Thirdweb
-- Seamless onboarding for new users
-- Multi-wallet support (MetaMask, Coinbase Wallet, WalletConnect)
+## Wallet Integration
+
+This project provides two approaches:
+
+- Local testing: a lightweight `WalletProvider` (see `src/lib/wallet.tsx`) that stores a pasted address in localStorage. Use this for quick dev and UI testing.
+- Mobile deep-link wallet: a Ronin Waypoint React Native example is provided in `waypoint-rn-example/` which demonstrates deep-link flows for authorize, sendNativeToken, personalSign, signTypedData, and sendTransaction.
 
 ## Environment Variables
 

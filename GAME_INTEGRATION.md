@@ -214,21 +214,25 @@ Adjust sandbox permissions based on game requirements.
 Before allowing game entry, verify user has sufficient staked tokens:
 
 ```typescript
-// In GameLobby.tsx
-import { useContract, useContractRead } from "@thirdweb-dev/react";
-import { STAKING_CONTRACT_ADDRESS } from "@/lib/constants";
+// In GameLobby.tsx (example using ethers)
+import { ethers } from "ethers";
+import { STAKING_CONTRACT_ADDRESS, CHAIN_CONFIG } from "@/lib/contracts";
 
-const { contract } = useContract(STAKING_CONTRACT_ADDRESS);
-const { data: stakeInfo } = useContractRead(contract, "getStakeInfo", [address]);
+// Minimal example: use an ethers provider connected to the configured RPC
+const provider = new ethers.providers.JsonRpcProvider(CHAIN_CONFIG.rpcUrl);
+const stakingAbi = [
+  // add the relevant ABI fragments for getStakeInfo
+  "function getStakeInfo(address account) view returns (uint256 amount)",
+];
 
-const handleStart = () => {
-  const amount = parseFloat(stakeAmount);
-  if (stakeInfo.amount < amount) {
-    alert("Insufficient staked tokens");
-    return;
-  }
-  onStart(amount);
-};
+const stakingContract = new ethers.Contract(STAKING_CONTRACT_ADDRESS, stakingAbi, provider);
+
+async function verifyStake(address: string, requiredAmount: number) {
+  const stakeInfo = await stakingContract.getStakeInfo(address);
+  return stakeInfo.toString() >= requiredAmount;
+}
+
+// Alternatively, use the Waypoint SDK (mobile deep-link) to trigger contract calls via the user's keyless wallet.
 ```
 
 ### 2. Game Result Recording
