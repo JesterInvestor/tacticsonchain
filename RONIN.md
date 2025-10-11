@@ -92,3 +92,24 @@ Here’s a **step-by-step guide** to adapt your [JesterInvestor/tacticsonchain](
 ---
 
 Would you like detailed starter code or guidance on a specific step, like wallet integration or smart contract structure?
+
+---
+
+NOTE: The codebase has been updated to use Ronin mainnet settings for the frontend provider and contract configuration. See `src/components/ThirdwebProvider.tsx` and `src/lib/contracts.ts` for the values:
+
+- Chain ID: 49429111 (Ronin mainnet)
+- RPC: https://api.roninchain.com/rpc
+- Explorer: https://explorer.roninchain.com
+
+To run locally after pulling changes:
+
+```powershell
+npm install
+# set .env variables (example)
+setx NEXT_PUBLIC_THIRDWEB_CLIENT_ID "your-client-id"
+setx NEXT_PUBLIC_TACT_TOKEN_ADDRESS "0x..."
+setx NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS "0x..."
+npm run dev
+```
+
+If you'd prefer to test against Ronin testnet instead, tell me and I can switch the values and add a small toggle to `src/lib/contracts.ts`.

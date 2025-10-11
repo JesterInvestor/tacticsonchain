@@ -7,13 +7,14 @@ export const CONTRACTS = {
   STAKING: process.env.NEXT_PUBLIC_STAKING_CONTRACT_ADDRESS || '',
 };
 
-export const CHAIN_ID = 84532; // Base Goerli testnet
+// Ronin mainnet configuration
+export const CHAIN_ID = 49429111; // Ronin mainnet
 
 export const CHAIN_CONFIG = {
   chainId: CHAIN_ID,
-  name: 'Base Goerli',
-  rpcUrl: 'https://goerli.base.org',
-  blockExplorer: 'https://goerli.basescan.org',
+  name: 'Ronin',
+  rpcUrl: 'https://api.roninchain.com/rpc',
+  blockExplorer: 'https://explorer.roninchain.com',
 };
 
 /**
