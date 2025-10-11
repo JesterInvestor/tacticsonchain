@@ -5,7 +5,7 @@ export type Network = 'saigon' | 'mainnet';
 export const NETWORK: Network = 'saigon';
 
 // Replace with your client ID from Ronin Developer Console or set programmatically
-export const CLIENT_ID = 'YOUR_CLIENT_ID';
+export const CLIENT_ID = '1f0d1669-9989-44d6-9259-0fba5f6bb34a';
 
 export function getWaypointOptions() {
   const common = {
