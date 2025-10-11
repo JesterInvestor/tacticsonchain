@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Button, Text, View, Linking, StyleSheet, ScrollView } from 'react-native';
-import Waypoint from '@sky-mavis/waypoint-native';
 import { v4 as uuidv4 } from 'uuid';
-import { getWaypointOptions, NETWORK } from './waypointConfig';
-
-const waypoint = new Waypoint(getWaypointOptions());
+import { waypoint, default as _waypoint } from './waypointClient';
+import { NETWORK } from './waypointConfig';
 
 export default function App() {
   const [lastResponse, setLastResponse] = useState<string | null>(null);
